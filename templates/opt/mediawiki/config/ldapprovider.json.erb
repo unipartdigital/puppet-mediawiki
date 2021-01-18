@@ -1,0 +1,43 @@
+{
+  "LDAP": {
+    "connection": {
+      "options": {},
+      "server": "<%= @ldap_server %>",
+      "port": <%= @ldap_port %>,
+      "enctype": "<%= @ldap_enctype %>",
+      "user": "<%= @ldap_bind_user %>",
+      "pass": "<%= @ldap_bind_password %>",
+      "basedn": "<%= @ldap_base_dn %>",
+      "groupbasedn": "<%= @ldap_group_dn %>",
+      "userbasedn": "<%= @ldap_user_dn %>",
+      "searchattribute": "<%= @ldap_search_attrib %>",
+      "searchstring": "<%= @ldap_search_string %>",
+      "usernameattribute": "<%= @ldap_user_attrib %>",
+      "realnameattribute": "<%= @ldap_name_attrib %>",
+      "emailattribute": "<%= @ldap_mail_attrib %>",
+      "grouprequest": "MediaWiki\\Extension\\LDAPProvider\\UserGroupsRequest\\<%= @ldap_group_strategy %>::factory",
+      "groupobjectclass": "<%= @ldap_group_class %>",
+      "groupattribute": "<%= @ldap_group_attrib %>"
+    },
+    "authorization": {
+      "rules": {
+        "groups": {
+          "required": [<%= @ldap_groups_required_list %>],
+          "excluded": [<%= @ldap_groups_excluded_list %>]
+        }
+      }
+    },
+    "userinfo": {
+      "attributes-map": {
+        "email": "<%= @ldap_mail_attrib %>",
+        "realname": "<%= @ldap_name_attrib %>"
+      }
+    },
+    "groupsync": {
+      "mechanism": "<%= @ldap_groups_mapping_mode %>",
+      "mapping": {
+<%= @ldap_groups_mapping_list %>
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+---
+mediawiki::admin_user: 'admin'
+mediawiki::admin_email: ''
+mediawiki::base_dir: '/opt/mediawiki'
+mediawiki::wiki_path: '/wiki'
+mediawiki::resource_path: ''
+mediawiki::owner: 'root'
+mediawiki::group: 'root'
+mediawiki::httpd: 'apache'
+mediawiki::httpd_group: 'apache'
+mediawiki::db_type: 'postgres'
+mediawiki::db_host: 'localhost'
+mediawiki::db_name: 'mediawiki'
+mediawiki::db_user: 'mediawiki'
+mediawiki::server_name: '%{facts.fqdn}'
+mediawiki::locale: 'en_GB.UTF-8'
+mediawiki::lang: 'en-gb'
+mediawiki::default_skin: 'vector'
+mediawiki::cache_type: 'CACHE_NONE'
+mediawiki::parser_cache_type: 'CACHE_NONE'
+mediawiki::logo_path: '$wgResourceBasePath/resources/assets/wiki.png'
+mediawiki::login_message: 'Login'
+mediawiki::ldap_enctype: 'ssl'
+mediawiki::ldap_server: ''
+mediawiki::ldap_bind_user: ''
+mediawiki::ldap_bind_password: ''
+mediawiki::ldap_base_dn: ''
+mediawiki::ldap_group_dn: ''
+mediawiki::ldap_user_dn: ''
+mediawiki::ldap_search_attrib: ''
+mediawiki::ldap_search_string: ''
+mediawiki::ldap_user_attrib: ''
+mediawiki::ldap_name_attrib: ''
+mediawiki::ldap_mail_attrib: ''
+mediawiki::ldap_groups_mapping_mode: 'mappedgroups'
+mediawiki::ldap_group_class: ''
+mediawiki::ldap_group_attrib: 'member'
+mediawiki::upload_dir: '/images'
+mediawiki::db_port: 5432
+mediawiki::ldap_port: 636
+mediawiki::image_uploads: true
+mediawiki::imagemagick: false
+mediawiki::email_enable: false
+mediawiki::email_user: true
+mediawiki::ldap_enabled: false
+mediawiki::ldap_group_strategy: 'GroupUniqueMember'
+mediawiki::skins:
+  - 'MonoBook'
+  - 'Timeless'
+  - 'Vector'
+mediawiki::bundled_extensions:
+  - 'CategoryTree'
+  - 'CodeEditor'
+  - 'ConfirmEdit'
+  - 'ImageMap'
+  - 'ParserFunctions'
+  - 'VisualEditor'
+  - 'WikiEditor'
+mediawiki::memcached_servers: []
+mediawiki::ldap_groups_required: []
+mediawiki::ldap_groups_excluded: []
+mediawiki::group_perms:
+  '*':
+    edit: false
+    read: true
+    createaccount: true
+    autocreateaccount: true
+mediawiki::password_routes:
+  username: true
+  email: true
+mediawiki::extensions: {}
+mediawiki::ldap_extensions:
+  PluggableAuth:
+    repo: 'https://phabricator.wikimedia.org/diffusion/EPLG/'
+    branch: 'master'
+    revision: 'master'
+  LDAPProvider:
+    repo: 'https://phabricator.wikimedia.org/diffusion/ELDQ/'
+    branch: 'master'
+    revision: 'master'
+  LDAPAuthentication2:
+    repo: 'https://phabricator.wikimedia.org/diffusion/ELDB/'
+    branch: 'master'
+    revision: 'master'
+  LDAPAuthorization:
+    repo: 'https://phabricator.wikimedia.org/diffusion/ELDP/'
+    branch: 'master'
+    revision: 'master'
+  LDAPUserInfo:
+    repo: 'https://phabricator.wikimedia.org/diffusion/ELDU/'
+    branch: 'master'
+    revision: 'master'
+  LDAPGroups:
+    repo: 'https://github.com/unipartdigital/mediawiki-extensions-LDAPGroups/'
+    branch: 'main'
+    revision: 'aeba779602c8defc99262dc70464635077a68345'
+mediawiki::ldap_groups_mapping: {}
+mediawiki::smtp_settings: {}
