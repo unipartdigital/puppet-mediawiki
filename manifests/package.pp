@@ -10,7 +10,6 @@ class mediawiki::package inherits mediawiki {
     owner   => $owner,
     group   => $group,
     mode    => '0755',
-    require => [Class['mediawiki::selinux']]
   }
 
   file { $docroot:
@@ -56,12 +55,11 @@ class mediawiki::package inherits mediawiki {
     require => [Archive[$package_name]]
   }
 
-  file { "/var/log/mediawiki-debug.log":
+  file { '/var/log/mediawiki-debug.log':
     ensure  => present,
     owner   => $httpd,
     group   => $httpd_group,
-    mode    => '0644',
-    require => Selinux::Fcontext['/var/log/mediawiki-debug.log']
+    mode    => '0644'
   }
 
   $extensions_list.each |$extension, $mod| {

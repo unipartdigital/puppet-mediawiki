@@ -13,7 +13,6 @@ class mediawiki (
   String $group,
   String $httpd,
   String $httpd_group,
-  String $db_type,
   String $db_host,
   String $db_name,
   String $db_user,
@@ -60,6 +59,7 @@ class mediawiki (
   Hash[String, String] $ldap_groups_mapping,
   Hash[String, Any] $smtp_settings,
   Hash[String, Hash[String, Variant[String, Hash[String, Any]]]] $extensions,
+  Enum['mysql', 'postgres'] $db_type,
   Enum[
     'GroupMember',
     'GroupUniqueMember',

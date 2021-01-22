@@ -8,7 +8,6 @@ mediawiki::owner: 'root'
 mediawiki::group: 'root'
 mediawiki::httpd: 'apache'
 mediawiki::httpd_group: 'apache'
-mediawiki::db_type: 'postgres'
 mediawiki::db_host: 'localhost'
 mediawiki::db_name: 'mediawiki'
 mediawiki::db_user: 'mediawiki'
@@ -43,6 +42,7 @@ mediawiki::imagemagick: false
 mediawiki::email_enable: false
 mediawiki::email_user: true
 mediawiki::ldap_enabled: false
+mediawiki::db_type: 'postgres'
 mediawiki::ldap_group_strategy: 'GroupUniqueMember'
 mediawiki::skins:
   - 'MonoBook'

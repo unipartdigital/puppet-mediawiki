@@ -1,5 +1,10 @@
 # =Class mediawiki::install
 class mediawiki::install inherits mediawiki {
+  require mediawiki::selinux
+  require mediawiki::package
+  require mediawiki::db
+  require ::php
+
   $ext_list = join($bundled_extensions, ',')
   $skin_list = join($skins, ',')
   $namespace = regsubst($wiki_name, ' ', '_')
@@ -20,7 +25,7 @@ class mediawiki::install inherits mediawiki {
   }
 
   exec { 'maintenance/install.php':
-    command   => join([
+    command => join([
       'php maintenance/install.php',
       "--server https://${server_name}",
       "--scriptpath ${wiki_path}",
@@ -37,17 +42,11 @@ class mediawiki::install inherits mediawiki {
       "--pass ${admin_pass}",
       "\"${wiki_name}\" ${admin_user}"
     ], ' '),
-    creates   => "${docroot}/LocalSettings.php",
-    cwd       => $docroot,
-    user      => 'root',
-    group     => 'root',
-    path      => '/usr/sbin:/usr/bin:/sbin:/bin',
-    require   => [
-      Class['mediawiki::selinux'],
-      Class['mediawiki::package'],
-      Class['mediawiki::db'],
-      Class['::php']
-    ]
+    creates => "${docroot}/LocalSettings.php",
+    cwd     => $docroot,
+    user    => 'root',
+    group   => 'root',
+    path    => '/usr/sbin:/usr/bin:/sbin:/bin'
   }
 
   file { "${docroot}/LocalSettings.php":
@@ -91,5 +90,29 @@ class mediawiki::install inherits mediawiki {
     path        => '/usr/sbin:/usr/bin:/sbin:/bin',
     require     => File["${docroot}/LocalSettings.php"],
     refreshonly => true
+  }
+
+
+  # Post-install SELinux tweaking
+
+  exec { 'restorecon /var/log/mediawiki-debug.log':
+    command => 'restorecon /var/log/mediawiki-debug.log',
+    onlyif  => 'test `ls -Z /var/log/mediawiki-debug.log | grep -c httpd_sys_rw_content_t` -eq 0',
+    user    => 'root',
+    path    => '/sbin:/usr/sbin:/bin:/usr/bin',
+  }
+
+  exec { "restorecon -r ${cache_dir}":
+    command => "restorecon -r ${cache_dir}",
+    onlyif  => "test `ls -aZ ${cache_dir} | grep -c httpd_sys_rw_content_t` -eq 0",
+    user    => 'root',
+    path    => '/sbin:/usr/sbin:/bin:/usr/bin',
+  }
+
+  exec { "restorecon -r ${upload_dir_real}":
+    command => "restorecon -r ${upload_dir_real}",
+    onlyif  => "test `ls -aZ ${upload_dir_real} | grep -c httpd_sys_rw_content_t` -eq 0",
+    user    => 'root',
+    path    => '/sbin:/usr/sbin:/bin:/usr/bin',
   }
 }
