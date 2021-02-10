@@ -20,8 +20,12 @@ if (!defined('MEDIAWIKI')) {
 
 ### Add non-puppetised settings below
 
+## Useful debugging options
+
 # Debug log file. This file is automatically created by Puppet
 # with an appropriate SELinux file context, but is not logged to
 # unless this line is uncommented.
 #$wgDebugLogFile = "/var/log/mediawiki-debug.log";
 
+# Show exception details
+#$wgShowExceptionDetails = true;
