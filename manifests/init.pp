@@ -90,6 +90,9 @@ class mediawiki (
     default => $wiki_id
   }
 
+  notify { "wiki_id: ${wiki_id}": }
+  notify { "db_name: ${db_name}": }
+
   contain mediawiki::selinux
   contain mediawiki::package
   contain mediawiki::db
