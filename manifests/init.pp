@@ -85,13 +85,11 @@ class mediawiki (
     $extensions_list = $extensions
   }
 
-  $db_name = $wiki_id ? {
-    undef => split($::fqdn, '.')[0],
-    default => $wiki_id
+  $id_parts = $wiki_id ? {
+    undef => split($::fqdn, '.'),
+    default => [$wiki_id]
   }
-
-  notify { "wiki_id: ${wiki_id}": }
-  notify { "db_name: ${db_name}": }
+  $db_name = $id_parts[0]
 
   contain mediawiki::selinux
   contain mediawiki::package
