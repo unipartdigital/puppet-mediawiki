@@ -14,7 +14,6 @@ class mediawiki (
   String $httpd,
   String $httpd_group,
   String $db_host,
-  String $db_name,
   String $db_user,
   String $db_pass,
   String $server_name,
@@ -41,13 +40,18 @@ class mediawiki (
   String $ldap_group_class,
   String $ldap_group_attrib,
   String $upload_dir,
+  String $swift_auth_url,
+  String $swift_storage_url,
+  String $swift_user,
+  String $swift_key,
   Integer $db_port,
   Integer $ldap_port,
   Boolean $image_uploads,
   Boolean $imagemagick,
-  Boolean $email_enable,
+  Boolean $email_enabled,
   Boolean $email_user,
   Boolean $ldap_enabled,
+  Boolean $swift_enabled,
   Array[String] $skins,
   Array[String] $bundled_extensions,
   Array[String] $memcached_servers,
@@ -68,15 +72,22 @@ class mediawiki (
   ] $ldap_group_strategy,
   Optional[String] $secret_key = undef,
   Optional[String] $upgrade_key = undef,
+  Optional[String] $wiki_id = undef,
 ) {
   $docroot = "${base_dir}/docroot"
   $cache_dir = "${base_dir}/cache"
   $config_dir = "${base_dir}/config"
   $upload_dir_real = "${docroot}${upload_dir}"
+
   if $ldap_enabled {
     $extensions_list = $extensions + $ldap_extensions
   } else {
     $extensions_list = $extensions
+  }
+
+  $db_name = $wiki_id ? {
+    undef => split($::fqdn, '.')[0],
+    default => $wiki_id
   }
 
   contain mediawiki::selinux

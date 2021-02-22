@@ -9,7 +9,6 @@ mediawiki::group: 'root'
 mediawiki::httpd: 'apache'
 mediawiki::httpd_group: 'apache'
 mediawiki::db_host: 'localhost'
-mediawiki::db_name: 'mediawiki'
 mediawiki::db_user: 'mediawiki'
 mediawiki::server_name: '%{facts.fqdn}'
 mediawiki::locale: 'en_GB.UTF-8'
@@ -35,13 +34,18 @@ mediawiki::ldap_groups_mapping_mode: 'mappedgroups'
 mediawiki::ldap_group_class: ''
 mediawiki::ldap_group_attrib: 'member'
 mediawiki::upload_dir: '/images'
+mediawiki::swift_auth_url: ''
+mediawiki::swift_storage_url: ''
+mediawiki::swift_user: ''
+mediawiki::swift_key: ''
 mediawiki::db_port: 5432
 mediawiki::ldap_port: 636
 mediawiki::image_uploads: true
 mediawiki::imagemagick: false
-mediawiki::email_enable: false
+mediawiki::email_enabled: false
 mediawiki::email_user: true
 mediawiki::ldap_enabled: false
+mediawiki::swift_enabled: false
 mediawiki::db_type: 'postgres'
 mediawiki::ldap_group_strategy: 'GroupUniqueMember'
 mediawiki::skins:

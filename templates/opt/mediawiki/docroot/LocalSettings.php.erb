@@ -56,7 +56,7 @@ $wgLogos = [ '1x' => "<%= @logo_path %>" ];
 
 ## UPO means: this is also a user preference option
 
-$wgEnableEmail = <%= @email_enable %>;
+$wgEnableEmail = <%= @email_enabled %>;
 $wgEnableUserEmail = <%= @email_user %>; # UPO
 
 $wgEmergencyContact = "<%= @admin_email %>";
@@ -173,6 +173,37 @@ $wgSMTP = [
   '<%= setting %>' => <%= value.is_a?(String) ? "'" + value + "'": value %>,
 <% end -%>
 ];
+
+<% if @swift_enabled -%>
+# Swift Object Storage
+$wgFileBackends[] = [
+  'name'            => 'localSwift-<%= @db_name %>',
+  'class'           => 'SwiftFileBackend',
+  'wikiId'          => '<%= @db_name %>',
+  'lockManager'     => 'nullLockManager',
+  'swiftAuthUrl'    => '<%= @swift_auth_url %>',
+  'swiftStorageUrl' => '<%= @swift_storage_url %>',
+  'swiftUser'       => '<%= @swift_user %>',
+  'swiftKey'        => '<%= @swift_key %>',
+  'parallelize'     => 'implicit',
+  'cacheAuthInfo'   => true,
+];
+
+$wgLocalFileRepo  =  array(
+  'class'             => 'LocalRepo',
+  'name'              => 'local',
+  'backend'           => 'localSwift-<%= @db_name %>',
+  'scriptDirUrl'      => $wgScriptPath,
+  'zones'             => [
+    'public' => ['container' => 'public', 'url' => '<%= @swift_storage_url %>/<%= @db_name %>-public'],
+    'thumb' => ['container' => 'thumb', 'url' => '<%= @swift_storage_url %>/<%= @db_name %>-thumb'],
+    'temp' => ['container' => 'temp', 'url' => '<%= @swift_storage_url %>/<%= @db_name %>-temp'],
+    'deleted' => ['container' => 'deleted'],
+  ],
+  'hashLevels'        => 2,
+  'deletedHashLevels' => 0,
+);
+<% end -%>
 
 
 # Load other settings
