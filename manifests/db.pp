@@ -5,9 +5,6 @@ class mediawiki::db inherits mediawiki {
       'postgres': {
         include postgresql::server
 
-        # Postgres module does not allow the automatic creation of DBs
-        # from hiera the way the mysql module does, so create it as
-        # a resource here
         postgresql::server::db { $db_name:
           user     => $db_user,
           password => postgresql_password($db_user, $db_pass),
@@ -22,8 +19,12 @@ class mediawiki::db inherits mediawiki {
         }
       }
       'mysql': {
-        # Define DBs in hiera
         include ::mysql::server
+
+        mysql::db { $db_name:
+          user     => $db_user,
+          password => $db_pass,
+        }
       }
     }
   }
