@@ -182,7 +182,9 @@ $wgFileBackends[] = [
   'wikiId'          => '<%= @db_name %>',
   'lockManager'     => 'nullLockManager',
   'swiftAuthUrl'    => '<%= @swift_auth_url %>',
+<% if @swift_storage_url != '' -%>
   'swiftStorageUrl' => '<%= @swift_storage_url %>',
+<% end -%>
   'swiftUser'       => '<%= @swift_user %>',
   'swiftKey'        => '<%= @swift_key %>',
   'parallelize'     => 'implicit',
