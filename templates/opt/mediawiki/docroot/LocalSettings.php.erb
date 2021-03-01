@@ -196,12 +196,14 @@ $wgLocalFileRepo  =  array(
   'name'              => 'local',
   'backend'           => 'localSwift-<%= @db_name %>',
   'scriptDirUrl'      => $wgScriptPath,
+<% if @swift_storage_url != '' -%>
   'zones'             => [
     'public' => ['container' => 'public', 'url' => '<%= @swift_storage_url %>/<%= @db_name %>-public'],
     'thumb' => ['container' => 'thumb', 'url' => '<%= @swift_storage_url %>/<%= @db_name %>-thumb'],
     'temp' => ['container' => 'temp', 'url' => '<%= @swift_storage_url %>/<%= @db_name %>-temp'],
     'deleted' => ['container' => 'deleted'],
   ],
+<% end -%>
   'hashLevels'        => 2,
   'deletedHashLevels' => 0,
 );
