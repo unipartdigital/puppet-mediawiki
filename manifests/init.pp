@@ -6,6 +6,7 @@ class mediawiki (
   String $admin_user,
   String $admin_pass,
   String $admin_email,
+  String $noreply_email,
   String $base_dir,
   String $wiki_path,
   String $resource_path,

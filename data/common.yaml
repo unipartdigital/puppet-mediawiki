@@ -1,6 +1,7 @@
 ---
 mediawiki::admin_user: 'admin'
 mediawiki::admin_email: ''
+mediawiki::noreply_email: ''
 mediawiki::base_dir: '/opt/mediawiki'
 mediawiki::wiki_path: '/wiki'
 mediawiki::resource_path: ''
