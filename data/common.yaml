@@ -61,7 +61,6 @@ mediawiki::bundled_extensions:
   - 'ConfirmEdit'
   - 'ImageMap'
   - 'ParserFunctions'
-  - 'VisualEditor'
   - 'WikiEditor'
 mediawiki::memcached_servers: []
 mediawiki::ldap_groups_required: []
