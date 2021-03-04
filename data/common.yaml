@@ -76,23 +76,23 @@ mediawiki::extensions: {}
 mediawiki::ldap_extensions:
   PluggableAuth:
     repo: 'https://phabricator.wikimedia.org/diffusion/EPLG/'
-    branch: 'master'
+    branch: 'REL1_35'
     revision: 'master'
   LDAPProvider:
     repo: 'https://phabricator.wikimedia.org/diffusion/ELDQ/'
-    branch: 'master'
+    branch: 'REL1_35'
     revision: 'master'
   LDAPAuthentication2:
     repo: 'https://phabricator.wikimedia.org/diffusion/ELDB/'
-    branch: 'master'
+    branch: 'REL1_35'
     revision: 'master'
   LDAPAuthorization:
     repo: 'https://phabricator.wikimedia.org/diffusion/ELDP/'
-    branch: 'master'
+    branch: 'REL1_35'
     revision: 'master'
   LDAPUserInfo:
     repo: 'https://phabricator.wikimedia.org/diffusion/ELDU/'
-    branch: 'master'
+    branch: 'REL1_35'
     revision: 'master'
   LDAPGroups:
     repo: 'https://github.com/unipartdigital/mediawiki-extensions-LDAPGroups/'
