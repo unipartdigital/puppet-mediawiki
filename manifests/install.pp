@@ -6,7 +6,7 @@ class mediawiki::install inherits mediawiki {
   require ::php
 
   $ext_list = join($bundled_extensions, ',')
-  $skin_list = join($skins, ',')
+  $skin_list = join($bundled_skins, ',')
   $namespace = regsubst($wiki_name, ' ', '_')
   $article_path = "${wiki_path}/\$1"
   $memcached_servers_list = $memcached_servers.map |$server| { "'${server}'" }.join(', ')
