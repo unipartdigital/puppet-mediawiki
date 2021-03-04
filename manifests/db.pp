@@ -1,6 +1,6 @@
 # =Class mediawiki::db
 class mediawiki::db inherits mediawiki {
-  if $db_host == 'localhost' or $db_host =~ /^127\./ {
+  if $manage_database and ($db_host == 'localhost' or $db_host =~ /^127\./) {
     case $db_type {
       'postgres': {
         include postgresql::server

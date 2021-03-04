@@ -46,6 +46,7 @@ mediawiki::email_enabled: false
 mediawiki::email_user: true
 mediawiki::ldap_enabled: false
 mediawiki::swift_enabled: false
+mediawiki::manage_database: true
 mediawiki::db_type: 'postgres'
 mediawiki::ldap_group_strategy: 'GroupUniqueMember'
 mediawiki::skins:
