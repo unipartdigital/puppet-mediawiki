@@ -130,6 +130,8 @@ $wgRightsIcon = "";
 # Path to the GNU diff3 utility. Used for conflict resolution.
 $wgDiff3 = "/usr/bin/diff3";
 
+# Do not require RESTBase for VisualEditor.
+$wgVisualEditorAllowLossySwitching = false;
 
 <% @group_perms.each do |group, content| -%>
 <% content.each do |perm, val| -%>
