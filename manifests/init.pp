@@ -24,6 +24,7 @@ class mediawiki (
   String $parser_cache_type,
   String $logo_path,
   String $login_message,
+  String $ldap_domain,
   String $ldap_enctype,
   String $ldap_server,
   String $ldap_bind_user,
