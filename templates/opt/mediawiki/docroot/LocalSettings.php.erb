@@ -142,8 +142,10 @@ $wgGroupPermissions['<%= group %>']['<%= perm %>'] = <%= val %>;
 $wgDefaultSkin = "<%= @default_skin %>";
 
 # Enabled skins.
-# The following skins were automatically enabled:
-<% @skins.each do |skin| -%>
+<% @bundled_skins.each do |skin| -%>
+wfLoadSkin( '<%= skin %>' );
+<% end -%>
+<% @skins.each do |skin, content| -%>
 wfLoadSkin( '<%= skin %>' );
 <% end -%>
 

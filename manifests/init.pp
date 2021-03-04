@@ -55,7 +55,7 @@ class mediawiki (
   Boolean $ldap_enabled,
   Boolean $swift_enabled,
   Boolean $manage_database,
-  Array[String] $skins,
+  Array[String] $bundled_skins,
   Array[String] $bundled_extensions,
   Array[String] $memcached_servers,
   Array[String] $ldap_groups_required,
@@ -66,6 +66,7 @@ class mediawiki (
   Hash[String, String] $ldap_groups_mapping,
   Hash[String, Any] $smtp_settings,
   Hash[String, Hash[String, Variant[String, Hash[String, Any]]]] $extensions,
+  Hash[String, Hash[String, String]] $skins,
   Enum['mysql', 'postgres'] $db_type,
   Enum[
     'GroupMember',

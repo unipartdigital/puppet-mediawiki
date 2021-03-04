@@ -51,7 +51,7 @@ mediawiki::swift_enabled: false
 mediawiki::manage_database: true
 mediawiki::db_type: 'postgres'
 mediawiki::ldap_group_strategy: 'GroupUniqueMember'
-mediawiki::skins:
+mediawiki::bundled_skins:
   - 'MonoBook'
   - 'Timeless'
   - 'Vector'
@@ -96,5 +96,6 @@ mediawiki::ldap_extensions:
     repo: 'https://github.com/unipartdigital/mediawiki-extensions-LDAPGroups/'
     branch: 'main'
     revision: 'aeba779602c8defc99262dc70464635077a68345'
+mediawiki::skins: {}
 mediawiki::ldap_groups_mapping: {}
 mediawiki::smtp_settings: {}

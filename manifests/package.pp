@@ -62,15 +62,29 @@ class mediawiki::package inherits mediawiki {
     mode    => '0644'
   }
 
-  $extensions_list.each |$extension, $mod| {
+  $extensions_list.each |$extension, $details| {
     vcsrepo { "${docroot}/extensions/${extension}":
-      revision => $mod['revision'],
+      revision => $details['revision'],
       provider => git,
-      source   => $mod['repo'],
+      source   => $details['repo'],
       user     => 'root',
       owner    => $owner,
       group    => $group,
-      branch   => $mod['branch'],
+      branch   => $details['branch'],
+      require  => Archive[$package_name],
+      notify   => Exec['maintenance/update.php']
+    }
+  }
+
+  $skins.each |$skin, $details| {
+    vcsrepo { "${docroot}/skins/${skin}":
+      revision => $details['revision'],
+      provider => git,
+      source   => $details['repo'],
+      user     => 'root',
+      owner    => $owner,
+      group    => $group,
+      branch   => $details['branch'],
       require  => Archive[$package_name],
       notify   => Exec['maintenance/update.php']
     }
