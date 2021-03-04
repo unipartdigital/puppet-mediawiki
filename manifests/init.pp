@@ -73,7 +73,8 @@ class mediawiki (
   ] $ldap_group_strategy,
   Optional[String] $secret_key = undef,
   Optional[String] $upgrade_key = undef,
-  Optional[String] $wiki_id = undef,
+  Optional[String] $db_name = undef,
+  Optional[String] $swift_name = undef,
 ) {
   $docroot = "${base_dir}/docroot"
   $cache_dir = "${base_dir}/cache"
@@ -86,9 +87,14 @@ class mediawiki (
     $extensions_list = $extensions
   }
 
-  $db_name = $wiki_id ? {
+  $database_name = $db_name ? {
     undef => split($::fqdn, '\.')[0],
-    default => [$wiki_id]
+    default => $db_name
+  }
+
+  $swift_namespace = $swift_name ? {
+    undef => split($::fqdn, '\.')[0],
+    default => $swift_name
   }
 
   contain mediawiki::selinux

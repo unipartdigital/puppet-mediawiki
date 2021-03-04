@@ -36,7 +36,7 @@ class mediawiki::install inherits mediawiki {
       "--dbuser ${db_user}",
       "--dbpass ${db_pass}",
       "--dbserver ${db_host}",
-      "--dbname ${db_name}",
+      "--dbname ${database_name}",
       "--dbport ${db_port}",
       "--dbtype ${db_type}",
       "--pass ${admin_pass}",

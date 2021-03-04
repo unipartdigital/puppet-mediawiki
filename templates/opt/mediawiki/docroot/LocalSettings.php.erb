@@ -70,7 +70,7 @@ $wgEmailAuthentication = true;
 ## Database settings
 $wgDBtype = "<%= @db_type %>";
 $wgDBserver = "<%= @db_host %>";
-$wgDBname = "<%= @db_name %>";
+$wgDBname = "<%= @database_name %>";
 $wgDBuser = "<%= @db_user %>";
 $wgDBpassword = "<%= @db_pass %>";
 
@@ -177,9 +177,9 @@ $wgSMTP = [
 <% if @swift_enabled -%>
 # Swift Object Storage
 $wgFileBackends[] = [
-  'name'            => 'localSwift-<%= @db_name %>',
+  'name'            => 'localSwift-<%= @swift_namespace %>',
   'class'           => 'SwiftFileBackend',
-  'wikiId'          => '<%= @db_name %>',
+  'wikiId'          => '<%= @swift_namespace %>',
   'lockManager'     => 'nullLockManager',
   'swiftAuthUrl'    => '<%= @swift_auth_url %>',
 <% if @swift_storage_url != '' -%>
@@ -194,12 +194,12 @@ $wgFileBackends[] = [
 $wgLocalFileRepo  =  array(
   'class'             => 'LocalRepo',
   'name'              => 'local',
-  'backend'           => 'localSwift-<%= @db_name %>',
+  'backend'           => 'localSwift-<%= @swift_namespace %>',
   'scriptDirUrl'      => $wgScriptPath,
   'zones'             => [
-    'public' => ['container' => 'public', 'url' => '<%= @swift_storage_url %>/<%= @db_name %>-public'],
-    'thumb' => ['container' => 'thumb', 'url' => '<%= @swift_storage_url %>/<%= @db_name %>-thumb'],
-    'temp' => ['container' => 'temp', 'url' => '<%= @swift_storage_url %>/<%= @db_name %>-temp'],
+    'public' => ['container' => 'public', 'url' => '<%= @swift_storage_url %>/<%= @swift_namespace %>-public'],
+    'thumb' => ['container' => 'thumb', 'url' => '<%= @swift_storage_url %>/<%= @swift_namespace %>-thumb'],
+    'temp' => ['container' => 'temp', 'url' => '<%= @swift_storage_url %>/<%= @swift_namespace %>-temp'],
     'deleted' => ['container' => 'deleted'],
   ],
   'hashLevels'        => 2,
