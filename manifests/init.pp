@@ -24,6 +24,7 @@ class mediawiki (
   String $cache_type,
   String $parser_cache_type,
   String $logo_path,
+  String $favicon_path,
   String $login_message,
   String $ldap_domain,
   String $ldap_enctype,
