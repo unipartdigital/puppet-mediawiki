@@ -61,6 +61,7 @@ class mediawiki (
   Array[String] $memcached_servers,
   Array[String] $ldap_groups_required,
   Array[String] $ldap_groups_excluded,
+  Array[String] $file_extensions,
   Hash[String, Hash[String, Boolean]] $group_perms,
   Hash[String, Boolean] $password_routes,
   Hash[String, Hash[String, String]] $ldap_extensions,

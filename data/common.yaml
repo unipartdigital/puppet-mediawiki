@@ -67,6 +67,12 @@ mediawiki::bundled_extensions:
 mediawiki::memcached_servers: []
 mediawiki::ldap_groups_required: []
 mediawiki::ldap_groups_excluded: []
+mediawiki::file_extensions:
+  - png
+  - gif
+  - jpg
+  - jpeg
+  - webp
 mediawiki::group_perms:
   '*':
     edit: false

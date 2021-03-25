@@ -13,6 +13,8 @@ class mediawiki::install inherits mediawiki {
   $ldap_groups_required_list = $ldap_groups_required.map |$group| { "\"cn=${group},${ldap_group_dn}\"" }.join(', ')
   $ldap_groups_excluded_list = $ldap_groups_excluded.map |$group| { "\"cn=${group},${ldap_group_dn}\"" }.join(', ')
   $ldap_groups_mapping_list = $ldap_groups_mapping.map |$wiki_group, $group| { "\"${wiki_group}\": \"cn=${group},${ldap_group_dn}\"" }.join(', ')
+  $file_exts = $file_extensions.map |$ext| { "'${ext}'" }.join(', ')
+
   if $secret_key {
     $secret_key_real = $secret_key
   } else {
