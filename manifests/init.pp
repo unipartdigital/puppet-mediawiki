@@ -55,6 +55,7 @@ class mediawiki (
   Boolean $email_user,
   Boolean $ldap_enabled,
   Boolean $swift_enabled,
+  Boolean $verify_mimetype,
   Boolean $manage_database,
   Array[String] $bundled_skins,
   Array[String] $bundled_extensions,
