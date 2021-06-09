@@ -73,10 +73,12 @@ $wgDBname = "<%= @database_name %>";
 $wgDBuser = "<%= @db_user %>";
 $wgDBpassword = "<%= @db_pass %>";
 
+<% if db_type == 'postgres' -%>
 # Postgres specific settings
 $wgDBport = "<%= @db_port %>";
 $wgDBmwschema = "mediawiki";
 
+<% end -%>
 ## Shared memory settings
 $wgMainCacheType = <%= @cache_type %>;
 $wgParserCacheType = <%= @parser_cache_type %>;
