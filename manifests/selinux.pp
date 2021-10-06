@@ -4,6 +4,7 @@
 # make sure they're handled appriopriately
 class mediawiki::selinux inherits mediawiki {
   selinux::boolean { 'httpd_can_network_connect': }
+  selinux::boolean { 'httpd_setrlimit': }
 
   selinux::fcontext{"${cache_dir}(/.*)?":
     seltype  => 'httpd_sys_rw_content_t',
