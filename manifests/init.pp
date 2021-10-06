@@ -68,7 +68,7 @@ class mediawiki (
   Hash[String, Hash[String, String]] $ldap_extensions,
   Hash[String, String] $ldap_groups_mapping,
   Hash[String, Any] $smtp_settings,
-  Hash[String, Hash[String, Variant[String, Hash[String, Any]]]] $extensions,
+  Hash[String, Hash[String, Variant[String, Hash[String, Any], Array[String]]]] $extensions,
   Hash[String, Hash[String, String]] $skins,
   Enum['mysql', 'postgres'] $db_type,
   Enum[
