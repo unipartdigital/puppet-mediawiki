@@ -2,88 +2,94 @@
 class mediawiki::package inherits mediawiki {
   require mediawiki::selinux
 
-  $package_name = "mediawiki-${package_version}.tar.gz"
-  $package_url = "https://releases.wikimedia.org/mediawiki/${minor_version}/${package_name}"
+  $package_name = "mediawiki-${mediawiki::package_version}.tar.gz"
+  $package_url = "https://releases.wikimedia.org/mediawiki/${mediawiki::minor_version}/${package_name}"
 
-  file { $base_dir:
-    ensure  => directory,
-    owner   => $owner,
-    group   => $group,
-    mode    => '0755',
+  file { $mediawiki::base_dir:
+    ensure => directory,
+    owner  => $mediawiki::owner,
+    group  => $mediawiki::group,
+    mode   => '0755',
   }
 
-  file { $docroot:
+  file { $mediawiki::docroot:
     ensure  => directory,
-    owner   => $owner,
-    group   => $group,
+    owner   => $mediawiki::owner,
+    group   => $mediawiki::group,
     mode    => '0755',
-    require => [File[$base_dir]]
+    require => [File[$mediawiki::base_dir]]
   }
 
-  file { $cache_dir:
+  file { $mediawiki::cache_dir:
     ensure  => directory,
-    owner   => $httpd,
-    group   => $httpd_group,
+    owner   => $mediawiki::httpd,
+    group   => $mediawiki::httpd_group,
     mode    => '0755',
-    require => [File[$base_dir]]
+    require => [File[$mediawiki::base_dir]]
   }
 
-  file { $config_dir:
+  file { $mediawiki::config_dir:
     ensure  => directory,
-    owner   => $owner,
-    group   => $group,
+    owner   => $mediawiki::owner,
+    group   => $mediawiki::group,
     mode    => '0755',
-    require => [File[$base_dir]]
+    require => [File[$mediawiki::base_dir]]
   }
 
   archive { $package_name:
     path            => "/tmp/${package_name}",
     source          => $package_url,
     extract         => true,
-    extract_path    => $docroot,
+    extract_path    => $mediawiki::docroot,
     extract_command => 'tar xfz %s --strip-components=1',
     cleanup         => true,
-    creates         => "${docroot}/index.php",
-    require         => [File[$docroot]],
+    creates         => "${mediawiki::docroot}/index.php",
+    require         => [File[$mediawiki::docroot]],
   }
 
-  file { "${docroot}/images":
+  file { "${mediawiki::docroot}/images":
     ensure  => directory,
-    owner   => $httpd,
-    group   => $httpd_group,
+    owner   => $mediawiki::httpd,
+    group   => $mediawiki::httpd_group,
     mode    => '0755',
     require => [Archive[$package_name]]
   }
 
   file { '/var/log/mediawiki-debug.log':
-    ensure  => present,
-    owner   => $httpd,
-    group   => $httpd_group,
-    mode    => '0644'
+    ensure => present,
+    owner  => $mediawiki::httpd,
+    group  => $mediawiki::httpd_group,
+    mode   => '0644'
   }
 
-  $extensions_list.each |$extension, $details| {
-    vcsrepo { "${docroot}/extensions/${extension}":
+  $mediawiki::extensions_list.each |$extension, $details| {
+    vcsrepo { "${mediawiki::docroot}/extensions/${extension}":
       revision => $details['revision'],
       provider => git,
       source   => $details['repo'],
       user     => 'root',
-      owner    => $owner,
-      group    => $group,
+      owner    => $mediawiki::owner,
+      group    => $mediawiki::group,
       branch   => $details['branch'],
       require  => Archive[$package_name],
       notify   => Exec['maintenance/update.php']
     }
+
+    if $details['packages'] =~ Array {
+      package { $details['packages']:
+        ensure => installed
+      }
+    }
   }
 
-  $skins.each |$skin, $details| {
-    vcsrepo { "${docroot}/skins/${skin}":
+  $mediawiki::skins.each |$skin, $details| {
+    vcsrepo { "${mediawiki::docroot}/skins/${skin}":
       revision => $details['revision'],
       provider => git,
       source   => $details['repo'],
       user     => 'root',
-      owner    => $owner,
-      group    => $group,
+      owner    => $mediawiki::owner,
+      group    => $mediawiki::group,
       branch   => $details['branch'],
       require  => Archive[$package_name],
       notify   => Exec['maintenance/update.php']

@@ -6,14 +6,14 @@ class mediawiki::selinux inherits mediawiki {
   selinux::boolean { 'httpd_can_network_connect': }
   selinux::boolean { 'httpd_setrlimit': }
 
-  selinux::fcontext{"${cache_dir}(/.*)?":
+  selinux::fcontext{"${mediawiki::cache_dir}(/.*)?":
     seltype  => 'httpd_sys_rw_content_t',
-    pathspec => "${cache_dir}(/.*)?",
+    pathspec => "${mediawiki::cache_dir}(/.*)?",
   }
 
-  selinux::fcontext{"${upload_dir_real}(/.*)?":
+  selinux::fcontext{"${mediawiki::upload_dir_real}(/.*)?":
     seltype  => 'httpd_sys_rw_content_t',
-    pathspec => "${upload_dir_real}(/.*)?",
+    pathspec => "${mediawiki::upload_dir_real}(/.*)?",
   }
 
   selinux::fcontext{'/var/log/mediawiki-debug.log':

@@ -1,30 +1,33 @@
 # =Class mediawiki::db
 class mediawiki::db inherits mediawiki {
-  if $manage_database and ($db_host == 'localhost' or $db_host =~ /^127\./) {
-    case $db_type {
+  if $mediawiki::manage_database and ($mediawiki::db_host == 'localhost' or $mediawiki::db_host =~ /^127\./) {
+    case $mediawiki::db_type {
       'postgres': {
         include postgresql::server
 
-        postgresql::server::db { $database_name:
-          user     => $db_user,
-          password => postgresql_password($db_user, $db_pass),
+        postgresql::server::db { $mediawiki::database_name:
+          user     => $mediawiki::db_user,
+          password => postgresql_password($mediawiki::db_user, $mediawiki::db_pass),
         }
 
         if defined('pgdump::dump') {
           class { 'pgdump::dump':
-            db_name     => $database_name,
+            db_name     => $mediawiki::database_name,
             db_dump_dir => '/var/lib/pgsql/dump',
-            require     => Postgresql::Server::Db[$database_name]
+            require     => Postgresql::Server::Db[$mediawiki::database_name]
           }
         }
       }
       'mysql': {
         include ::mysql::server
 
-        mysql::db { $database_name:
-          user     => $db_user,
-          password => $db_pass,
+        mysql::db { $mediawiki::database_name:
+          user     => $mediawiki::db_user,
+          password => $mediawiki::db_pass,
         }
+      }
+      default: {
+        warning("Database type ${mediawiki::db_type} is not supported")
       }
     }
   }
