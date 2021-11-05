@@ -1,4 +1,26 @@
 ---
+lookup_options:
+  mediawiki::extensions:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
+      knockout_prefix: '--'
+  mediawiki::bundled_extensions:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
+      knockout_prefix: '--'
+  mediawiki::skins:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
+      knockout_prefix: '--'
+  mediawiki::bundled_skins:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
+      knockout_prefix: '--'
+
 mediawiki::admin_user: 'admin'
 mediawiki::admin_email: ''
 mediawiki::noreply_email: ''
