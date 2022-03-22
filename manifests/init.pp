@@ -47,6 +47,7 @@ class mediawiki (
   String $swift_storage_url,
   String $swift_user,
   String $swift_key,
+  String $dump_dir,
   Integer $db_port,
   Integer $ldap_port,
   Boolean $image_uploads,

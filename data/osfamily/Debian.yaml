@@ -1,3 +1,4 @@
 mediawiki::manage_selinux: false
 mediawiki::httpd: www-data
 mediawiki::httpd_group: www-data
+mediawiki::dump_dir: /var/lib/postgresql/dump

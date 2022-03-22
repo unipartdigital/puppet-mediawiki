@@ -63,6 +63,7 @@ mediawiki::swift_auth_url: ''
 mediawiki::swift_storage_url: ''
 mediawiki::swift_user: ''
 mediawiki::swift_key: ''
+mediawiki::dump_dir: '/var/lib/pgsql/dump'
 mediawiki::db_port: 5432
 mediawiki::ldap_port: 636
 mediawiki::image_uploads: true

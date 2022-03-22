@@ -13,7 +13,7 @@ class mediawiki::db inherits mediawiki {
         if defined('pgdump::dump') {
           class { 'pgdump::dump':
             db_name     => $mediawiki::database_name,
-            db_dump_dir => '/var/lib/pgsql/dump',
+            db_dump_dir => $mediawiki::dump_dir,
             require     => Postgresql::Server::Db[$mediawiki::database_name]
           }
         }
