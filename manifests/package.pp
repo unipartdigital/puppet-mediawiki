@@ -5,6 +5,17 @@ class mediawiki::package inherits mediawiki {
   $package_name = "mediawiki-${mediawiki::package_version}.tar.gz"
   $package_url = "https://releases.wikimedia.org/mediawiki/${mediawiki::minor_version}/${package_name}"
 
+  @user { $mediawiki::owner:
+    ensure => present,
+  }
+  @group { $mediawiki::group:
+    ensure => present
+  }
+
+  Group <| title == $mediawiki::group |>
+  -> User <| title == $mediawiki::owner |>
+  ->File[$mediawiki::base_dir]
+
   file { $mediawiki::base_dir:
     ensure => directory,
     owner  => $mediawiki::owner,
