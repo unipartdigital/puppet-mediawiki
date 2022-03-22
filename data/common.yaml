@@ -73,6 +73,7 @@ mediawiki::ldap_enabled: false
 mediawiki::swift_enabled: false
 mediawiki::verify_mimetype: false
 mediawiki::manage_database: true
+mediawiki::manage_selinux: false
 mediawiki::db_type: 'postgres'
 mediawiki::ldap_group_strategy: 'GroupUniqueMember'
 mediawiki::bundled_skins:
