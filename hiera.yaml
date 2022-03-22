@@ -4,8 +4,8 @@ defaults:
   datadir: data
   data_hash: yaml_data
 hierarchy:
-  # - name: "OS family"
-  #   path: "os/%{facts.os.family}.yaml"
-
+  - name: "OS Family"
+    paths:
+      - "osfamily/%{::osfamily}.yaml"
   - name: "common"
     path: "common.yaml"

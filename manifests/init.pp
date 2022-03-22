@@ -57,6 +57,7 @@ class mediawiki (
   Boolean $swift_enabled,
   Boolean $verify_mimetype,
   Boolean $manage_database,
+  Boolean $manage_selinux,
   Array[String] $bundled_skins,
   Array[String] $bundled_extensions,
   Array[String] $memcached_servers,
@@ -103,7 +104,9 @@ class mediawiki (
     default => $swift_name
   }
 
-  contain mediawiki::selinux
+  if $manage_selinux {
+    contain mediawiki::selinux
+  }
   contain mediawiki::package
   contain mediawiki::db
   contain mediawiki::install
