@@ -58,6 +58,7 @@ class mediawiki (
   Boolean $verify_mimetype,
   Boolean $manage_database,
   Boolean $manage_selinux,
+  Boolean $manage_httpd,
   Array[String] $bundled_skins,
   Array[String] $bundled_extensions,
   Array[String] $memcached_servers,
