@@ -104,9 +104,7 @@ class mediawiki (
     default => $swift_name
   }
 
-  if $manage_selinux {
-    contain mediawiki::selinux
-  }
+  contain mediawiki::selinux
   contain mediawiki::package
   contain mediawiki::db
   contain mediawiki::install
