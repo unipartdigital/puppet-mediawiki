@@ -99,24 +99,26 @@ class mediawiki::install inherits mediawiki {
 
   # Post-install SELinux tweaking
 
-  exec { 'restorecon /var/log/mediawiki-debug.log':
-    command => 'restorecon /var/log/mediawiki-debug.log',
-    onlyif  => 'test `ls -Z /var/log/mediawiki-debug.log | grep -c httpd_sys_rw_content_t` -eq 0',
-    user    => 'root',
-    path    => '/sbin:/usr/sbin:/bin:/usr/bin',
-  }
+  if $mediawiki::manage_selinux {
+    exec { 'restorecon /var/log/mediawiki-debug.log':
+      command => 'restorecon /var/log/mediawiki-debug.log',
+      onlyif  => 'test `ls -Z /var/log/mediawiki-debug.log | grep -c httpd_sys_rw_content_t` -eq 0',
+      user    => 'root',
+      path    => '/sbin:/usr/sbin:/bin:/usr/bin',
+    }
 
-  exec { "restorecon -r ${mediawiki::cache_dir}":
-    command => "restorecon -r ${mediawiki::cache_dir}",
-    onlyif  => "test `ls -aZ ${mediawiki::cache_dir} | grep -c httpd_sys_rw_content_t` -eq 0",
-    user    => 'root',
-    path    => '/sbin:/usr/sbin:/bin:/usr/bin',
-  }
+    exec { "restorecon -r ${mediawiki::cache_dir}":
+      command => "restorecon -r ${mediawiki::cache_dir}",
+      onlyif  => "test `ls -aZ ${mediawiki::cache_dir} | grep -c httpd_sys_rw_content_t` -eq 0",
+      user    => 'root',
+      path    => '/sbin:/usr/sbin:/bin:/usr/bin',
+    }
 
-  exec { "restorecon -r ${mediawiki::upload_dir_real}":
-    command => "restorecon -r ${mediawiki::upload_dir_real}",
-    onlyif  => "test `ls -aZ ${mediawiki::upload_dir_real} | grep -c httpd_sys_rw_content_t` -eq 0",
-    user    => 'root',
-    path    => '/sbin:/usr/sbin:/bin:/usr/bin',
+    exec { "restorecon -r ${mediawiki::upload_dir_real}":
+      command => "restorecon -r ${mediawiki::upload_dir_real}",
+      onlyif  => "test `ls -aZ ${mediawiki::upload_dir_real} | grep -c httpd_sys_rw_content_t` -eq 0",
+      user    => 'root',
+      path    => '/sbin:/usr/sbin:/bin:/usr/bin',
+    }
   }
 }
