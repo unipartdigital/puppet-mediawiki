@@ -1,1 +1,3 @@
 mediawiki::manage_selinux: false
+mediawiki::httpd: apache
+mediawiki::httpd_group: apache

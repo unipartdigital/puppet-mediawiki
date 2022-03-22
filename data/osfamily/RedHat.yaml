@@ -1,1 +1,3 @@
 mediawiki::manage_selinux: true
+mediawiki::httpd: www-data
+mediawiki::httpd_group: www-data

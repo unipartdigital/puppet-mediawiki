@@ -5,15 +5,17 @@ class mediawiki::package inherits mediawiki {
   $package_name = "mediawiki-${mediawiki::package_version}.tar.gz"
   $package_url = "https://releases.wikimedia.org/mediawiki/${mediawiki::minor_version}/${package_name}"
 
-  @user { $mediawiki::owner:
-    ensure => present,
-  }
-  @group { $mediawiki::group:
-    ensure => present
+  if $mediawiki::manage_httpd {
+    user { $mediawiki::httpd:
+      ensure => present,
+    }
+    group { $mediawiki::httpd_group:
+      ensure => present
+    }
   }
 
-  Group <| title == $mediawiki::group |>
-  -> User <| title == $mediawiki::owner |>
+  Group <| title == $mediawiki::httpd_group |>
+  -> User <| title == $mediawiki::httpd |>
   ->File[$mediawiki::base_dir]
 
   file { $mediawiki::base_dir:
