@@ -191,6 +191,9 @@ $wgFileBackends[] = [
 <% end -%>
   'swiftUser'       => '<%= @swift_user %>',
   'swiftKey'        => '<%= @swift_key %>',
+<% if @swift_temp_url_key != '' -%>
+  'swiftTempUrlKey' => '<%= @swift_temp_url_key %>',
+<% end -%>
   'parallelize'     => 'implicit',
   'cacheAuthInfo'   => true,
 ];
