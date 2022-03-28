@@ -67,6 +67,7 @@ mediawiki::swift_temp_url_key: ''
 mediawiki::dump_dir: '/var/lib/pgsql/dump'
 mediawiki::db_port: 5432
 mediawiki::ldap_port: 636
+mediawiki::parser_cache_expiry: 86400
 mediawiki::image_uploads: true
 mediawiki::imagemagick: false
 mediawiki::email_enabled: false

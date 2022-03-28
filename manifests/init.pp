@@ -51,6 +51,7 @@ class mediawiki (
   String $dump_dir,
   Integer $db_port,
   Integer $ldap_port,
+  Integer $parser_cache_expiry,
   Boolean $image_uploads,
   Boolean $imagemagick,
   Boolean $email_enabled,
